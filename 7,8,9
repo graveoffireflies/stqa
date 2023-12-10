@@ -1,0 +1,64 @@
+package javaapplication1;
+import java.util.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+ 
+public class JavaApplication1 {
+public static WebDriver driver;
+public static void main(String args[])
+{
+    //elminated or optional
+//        DesiredCapabilities capabilities = new DesiredCapabilities();
+//    capabilities = DesiredCapabilities.firefox();
+//    capabilities.setBrowserName("firefox");
+//    capabilities.setVersion("38.0.5");
+//    capabilities.setPlatform(Platform.WINDOWS);
+//    capabilities.setCapability("qmarionette", false);
+ 
+System.setProperty("webdriver.firefox.logfile", "null");//disable browser warnigs    
+System.setProperty("webdriver.gecko.driver", "D:\\netbeans\\geckodriver.exe");
+     driver= new FirefoxDriver();
+ 
+ 
+/*7
+driver.get("https://www.youtube.com/");
+List<WebElement> links =driver.findElements(By.tagName("a"));
+System.out.println("Total links are"+links.size());
+for (int i = 0; i<links.size(); i=i+1)
+{
+System.out.println("Link "+ i + " Link name "+ links.get(i).getText());
+}
+*/
+
+ 
+ 
+/*9
+    driver.get("http://browsershots.org/");
+    List<WebElement> c =  driver.findElements(By.xpath("//input[@type='checkbox']"));
+     System.out.println("Count of Check boxes  "+c.size());
+     List<WebElement> d =  driver.findElements(By.xpath("//input[@type='checkbox' and @checked]"));
+     System.out.println("Count of Check boxes Checked  "+d.size());
+     List<WebElement> e =  driver.findElements(By.xpath("//input[@type='checkbox' and not(@checked)]"));
+     System.out.println("Count of Check boxes Not Checked  "+e.size());
+*/
+
+
+//8
+driver.get("http://geeksforgeeks.org/");
+List<WebElement> optionCount = driver.findElements(By.cssSelector(" input"));
+System.out.println("Number of Options in the Combo Box is "+ 
+optionCount.size());
+optionCount.get(0).click();
+//for (int i = 0; i<optionCount.size(); i=i+1)
+//{
+//System.out.println(optionCount.get(i).getText());
+// }
+//driver.quit();
+}
+ 
+}
