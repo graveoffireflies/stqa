@@ -1,0 +1,89 @@
+
+
+Aim: Write a program using Selenium WebDriver to automate the login process on a specific web page. Verify successful login with appropriate assertions.
+
+Steps: 
+1)	Create a Login.html & User.php file and save it in C:\xampp\htdocs\stpracts
+2)	Open Netbeans 8.1 > Create Project on Java Application naming it as Login > Add selenium jar files in the library > Type the Code >  give proper path to geckodriver 
+3)	Connect the Xampp server > Open Firefox type http://localhost:8080/stpracts/ .It will display a web page > Click on Login.html > Copy the URL (http://localhost:8080/stpracts/Login.html)
+4)	Paste the URL in the Java Code & RUn the Program
+
+Login.html
+<html>
+<head>
+<title> Login Page </title>
+</head>
+<body>
+<form id= "login" action = "http://localhost:8080//User.php" method="post" accept-charset='UTF-8'>
+User Name*:
+<input type= "text" name = "username" id="username" maxlength="50"/>
+Password*:
+<input type= "password" name = "password" id="password" maxlength="50"/>
+<input type = 'submit' name= "button" value="submit"/>
+</form>
+</body>
+</html>
+
+User.php
+<?php
+$u=$_POST['username'];
+$p=$_POST['password'];
+if(($u == "test") && ($p == "test"))
+{
+ echo "Login Successful";
+}
+ else
+{ 
+ echo "invalid user";
+}
+
+
+
+
+
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package loginpage;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+/**
+ *
+ * @author admin
+ */
+public class Loginpage {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        System.setProperty("webdriver.gecko.driver","E:\\Shankar\\TY Practicals\\STQA\\geckodriver.exe");
+        
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities = DesiredCapabilities.firefox();
+        capabilities.setBrowserName("firefox");
+        capabilities.setVersion("38.0.1");
+        capabilities.setPlatform(Platform.WINDOWS);
+        capabilities.setCapability("marionette", false);
+        
+        WebDriver driver = new FirefoxDriver(capabilities);
+        driver.get("http:\\localhost\\login.html");
+        driver.manage().window().maximize();
+
+        driver.findElement(By.name("username")).sendKeys("shankar");
+        driver.findElement(By.name("password")).sendKeys("656544");
+        driver.findElement(By.name("btn")).click();
+        
+        //driver.navigate().back();
+    }
+    
+}

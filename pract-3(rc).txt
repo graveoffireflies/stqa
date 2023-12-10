@@ -1,0 +1,77 @@
+Step 1. Download mozilla firefox 38.0.5
+Step 2 : download geckodriver win64 version.
+Search these jar files in Local disk folder
+                     	1 . Selenium-java-client-driver-1.0.1.jar
+2. Selenium-server-standalone-3.13.0.jar
+Step 4: Type html code in notepad and save it as Gcd.html
+Step 5: download netbean 8.1 , Create project >> JAVA >> java application>> Seleniumgcd>> Type the java code , in libraries add above two jar files>>Give proper path of geckodriver in the code >>And run the code.
+______________________________________________________________________
+HTML Code: 
+<html>
+	<head>
+	<script type="text/javascript">
+    	function gcd()
+    	{
+       	 var x,y;
+            x=parseInt(document.myform.n1.value);
+            y=parseInt(document.myform.n2.value);
+        	while(x!=y)
+        	{ if(x>y)
+                	x=x-y;
+          	else
+          	y=y-x;
+  	}
+  	document.myform.result.value=x;
+  }
+  </script>
+	</head>
+	<body>
+    	<h1 align="center">program to calculate gcd of 2 nos</h1>
+        	<hr color="red">
+        	<center>
+        	enter two numbers:
+        	<form name="myform">
+        	number 1:<input type="text" name="n1" value=""><br><br>
+        	number 2:<input type="text" name="n2" value=""><br><br>
+    	<input type="button" name="btn" value="GET GCD" onclick="gcd()"><br><br>
+    	GCD is:<input type="text" name="result" value="">
+    	</form>
+	</body>
+</html>
+—----------------------------------------------------------------------------------------------------------------------------
+
+JAVA Code:
+
+
+package seleniumgcd;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+public class Seleniumgcd {
+
+    public static void main(String[] args) {
+
+        
+    System.setProperty("webdriver.gecko.driver", "D:\\selenium\\geckodriver.exe");
+    DesiredCapabilities capabilities=new DesiredCapabilities();
+    capabilities = DesiredCapabilities.firefox();
+    capabilities.setBrowserName("firefox");
+    capabilities.setVersion("38.0.5");
+    capabilities.setPlatform(Platform.WINDOWS);
+    capabilities.setCapability("marionette", false);
+    
+    WebDriver driver=new FirefoxDriver (capabilities);
+    driver.get("C:\\Users\\admin\\Documents\\Gcd.html");
+    driver.manage().window().maximize();
+    driver.findElement(By.name("n1")).sendKeys("14");
+    driver.findElement(By.name("n2")).sendKeys("28");
+    driver.findElement(By.name("btn")).click();
+    String result=driver.findElement(By.name("result")).getAttribute("value");
+    System.out.println("GCD is"+result);
+    }
+
+    }
